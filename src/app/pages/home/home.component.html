@@ -1,3 +1,43 @@
+<header class="app-header">
+
+  <div class="left">
+    <span class="logo">⏰</span>
+    <span class="title">Waker</span>
+  </div>
+
+  <div class="center">
+    <span class="status" *ngIf="ringtones.length">
+      Active: {{ringtones.length}}
+    </span>
+  </div>
+
+  <div class="right">
+
+    <!-- Ringtone -->
+    <select [(ngModel)]="selectedRingtone">
+      <option *ngFor="let tone of ringtones" [value]="tone.file">
+        {{tone.name}}
+      </option>
+    </select>
+
+    <!-- Start / Stop -->
+    <button (click)="toggleTracking()">
+      {{ isTracking ? '⏹ Stop' : '▶ Start' }}
+    </button>
+
+    <!-- Menu -->
+    <!-- <button (click)="toggleMenu()">☰</button> -->
+
+    <div class="side-menu" *ngIf="isMenuOpen">
+    <h3>Settings</h3>
+    <!-- <button (click)="clearAllAlarms()">Clear All</button> -->
+    <button (click)="stopTracking()">Stop Tracking</button>
+    </div>
+
+  </div>
+
+</header>
+
 <div class="search-wrapper">
 
   <!-- Search Box -->

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import swal from 'sweetalert2';
 import * as L from 'leaflet';
 
 
@@ -8,6 +9,9 @@ import * as L from 'leaflet';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  isTracking = false;
+  isMenuOpen = false;
 
   searchText: string = '';
   searchResults: any[] = [];
@@ -20,6 +24,14 @@ export class HomeComponent {
   alarmTriggered = false;
   currentDistance: number | null = null;
   private searchTimeout: any;
+
+  ringtones = [
+  { name: 'Warning', file: 'assets/alarm/alarm.mp3' },
+  { name: 'Mor baniyo', file: 'assets/alarm/radha_rani1.mp3' },
+  { name: 'Radha Radha', file: 'assets/alarm/radha_radha.mp3' }
+  ];
+
+ selectedRingtone = 'assets/alarm/radha_rani1.mp3';
 
   map!: L.Map;
   destinationMarker!: L.Marker;
@@ -210,20 +222,20 @@ export class HomeComponent {
 
     this.userMarker = L.marker([lat, lng]).addTo(this.map);
       this.currentDistance = Math.round(distance);
-      console.log('Current Position:', { lat, lng });
-      console.log('Target Position:', {
-        lat: this.selectedLat,
-        lng: this.selectedLng
-      });
-      console.log('Distance to Target (meters):', distance);
-      console.log("Distance:", distance);
-
+ 
       if (distance <= this.radius && !this.alarmTriggered) {
         console.log('🎯 Target reached! Triggering alarm...');
         this.triggerAlarm();
         this.alarmTriggered = true;
+      }else if (distance > 200 && !this.alarmTriggered) {
+        navigator.vibrate([200]);
+        const msg = new SpeechSynthesisUtterance("You are 200 meters away from your destination. Keep going!");
+        speechSynthesis.speak(msg);
+      }else if (distance > 100 && !this.alarmTriggered) {
+        navigator.vibrate([200]);
+        const msg = new SpeechSynthesisUtterance("You are 100 meters away from your destination. Almost there!");
+        speechSynthesis.speak(msg);
       }
-
     },
     (err) => console.error(err),
     {
@@ -252,10 +264,15 @@ export class HomeComponent {
 }
 
 triggerAlarm() {
-  const audio = new Audio('assets/alarm/alarm.mp3');
+  navigator.vibrate([500, 200, 500]);
+  const audio = new Audio(this.selectedRingtone);
   audio.play();
-
-  alert('🎯 You reached your destination!');
+  swal.fire({
+    title: '🎯 Target Reached!',
+    text: 'You have arrived at your destination.',
+    icon: 'success'
+  });
+  // alert('🎯 You reached your destination!');
 }
 
 stopTracking() {
@@ -263,9 +280,26 @@ stopTracking() {
     navigator.geolocation.clearWatch(this.watchId);
   }
 }
+
 updateCircle() {
   if (this.radiusCircle && this.selectedLat && this.selectedLng) {
     this.radiusCircle.setRadius(this.radius);
   }
 }
+
+
+toggleTracking() {
+  if (this.isTracking) {
+    this.stopTracking();
+    this.isTracking = false;
+  } else {
+    this.startTracking();
+    this.isTracking = true;
+  }
+}
+
+toggleMenu() {
+  this.isMenuOpen = !this.isMenuOpen;
+}
+
 }

@@ -1,3 +1,75 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: linear-gradient(135deg, #121213, #1d4076);
+  border-radius:10px;
+  color: white;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.side-menu {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 250px;
+  height: 100%;
+
+  background: white;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.2);
+  padding: 20px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  font-size: 20px;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.center {
+  font-size: 14px;
+}
+
+.right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.right select,
+.right button {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .title {
+    display: none;
+  }
+
+  .center {
+    display: none;
+  }
+
+  .right select {
+    max-width: 100px;
+  }
+}
+
 .search-wrapper {
   position: relative;
   width: 100%;
