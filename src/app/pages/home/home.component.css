@@ -1,0 +1,153 @@
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* SEARCH BOX */
+.search-box {
+  display: flex;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 10px 14px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.search-box:focus-within {
+  transform: scale(1.02);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+}
+
+/* ICON */
+.icon {
+  margin-right: 10px;
+  opacity: 0.6;
+}
+
+/* CLEAR BUTTON */
+.clear-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+/* LOCATION BUTTON */
+.loc-btn {
+  border: none;
+  background: #0077ff;
+  color: white;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loc-btn:hover {
+  transform: scale(1.1);
+}
+
+/* DROPDOWN */
+.dropdown {
+  margin-top: 10px;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* RESULT ITEM */
+.result-item {
+  padding: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.result-item:hover {
+  background: #f5f7fa;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: gray;
+}
+
+/* LOADING */
+.loading {
+  padding: 12px;
+  text-align: center;
+  color: gray;
+}
+
+.radius-container {
+  margin: 20px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.preset {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.preset button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #e3f2fd;
+}
+
+.start-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  background: #0077ff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.distance-box {
+  margin: 10px 20px;
+  padding: 10px;
+  background: #e3f2fd;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+}
+
+#map {
+  height: 300px;
+  margin: 20px;
+  border-radius: 12px;
+}

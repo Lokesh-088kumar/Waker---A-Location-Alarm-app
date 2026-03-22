@@ -1,0 +1,72 @@
+<div class="search-wrapper">
+
+  <!-- Search Box -->
+  <div class="search-box">
+
+    <span class="icon">🔍</span>
+
+    <input
+      type="text"
+      placeholder="Search for a place..."
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+    />
+
+    <button *ngIf="searchText" class="clear-btn" (click)="clearSearch()">✖</button>
+
+    <button class="loc-btn" (click)="useCurrentLocation()">
+    <span *ngIf="!isLoading">📍</span>
+    <span *ngIf="isLoading">⏳</span>
+    </button>
+
+  </div>
+
+  <!-- Dropdown -->
+  <div class="dropdown" *ngIf="searchResults.length || isLoading">
+
+    <div *ngIf="isLoading" class="loading">
+      Searching locations...
+    </div>
+
+    <div
+      class="result-item"
+      *ngFor="let place of searchResults"
+      (click)="selectPlace(place)"
+    >
+      <div class="title">
+        {{ place.display_name.split(',')[0] }}
+      </div>
+      <div class="subtitle">
+        {{ place.display_name }}
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="map"></div>
+
+<div class="radius-container" *ngIf="selectedLat && selectedLng">
+
+  <label>Radius: {{radius}} meters</label>
+
+    <input type="range" min="50" max="500"
+    [(ngModel)]="radius"
+    (input)="updateCircle()" />
+
+  <div class="preset">
+    <button (click)="radius = 50">50m</button>
+    <button (click)="radius = 100">100m</button>
+    <button (click)="radius = 200">200m</button>
+  </div>
+
+  <button class="start-btn" (click)="startTracking()">
+    Start Alarm
+  </button>
+
+  <div class="distance-box" *ngIf="currentDistance !== null">
+  📏 Distance: {{currentDistance}} meters
+</div>
+
+</div>
