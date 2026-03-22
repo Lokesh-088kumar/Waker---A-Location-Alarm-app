@@ -227,11 +227,11 @@ export class HomeComponent {
         console.log('🎯 Target reached! Triggering alarm...');
         this.triggerAlarm();
         this.alarmTriggered = true;
-      }else if (distance > 200 && !this.alarmTriggered) {
+      }else if (distance <= 200 && !this.alarmTriggered) {
         navigator.vibrate([200]);
         const msg = new SpeechSynthesisUtterance("You are 200 meters away from your destination. Keep going!");
         speechSynthesis.speak(msg);
-      }else if (distance > 100 && !this.alarmTriggered) {
+      }else if (distance <= 100 && !this.alarmTriggered) {
         navigator.vibrate([200]);
         const msg = new SpeechSynthesisUtterance("You are 100 meters away from your destination. Almost there!");
         speechSynthesis.speak(msg);
